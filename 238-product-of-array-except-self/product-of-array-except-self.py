@@ -6,14 +6,10 @@ class Solution(object):
         l_arr = [0] * n
         r_arr = [0] * n
 
-        for i in range(n):
-            j = -i -1 
+        for i in range(0,n):
+            j = -i -1
             l_arr[i] = l_mult
             r_arr[j] = r_mult
             l_mult *= nums[i]
-            r_mult *= nums [j]
-        
-        return[l*r for l ,r in zip(l_arr,r_arr)]
-
-
-        
+            r_mult *= nums[j]
+        return [l*r  for l,r in zip(l_arr,r_arr)]
