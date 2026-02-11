@@ -1,3 +1,5 @@
+## bottom-up approach
+## tabulization
 class Solution:
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
@@ -7,10 +9,10 @@ class Solution:
         if n == 2:
             return max(nums[0],nums[1])
         memo={0:nums[0],1:max(nums[0], nums[1])}
-        def helper(i):
-            if i in memo:
-                return memo[i]
-            else:
-                memo[i] = max(nums[i] + helper(i-2) , helper(i-1))
-                return memo[i]
-        return helper(n-1)
+        dp = [0] * n
+        dp[0] = nums[0]
+        dp[1] = max(nums[0],nums[1])
+
+        for i in range(2,n):
+            dp[i] = max(nums[i] + dp[i-2] , dp[i-1])
+        return dp[n-1]
