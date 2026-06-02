@@ -2,6 +2,7 @@ class Solution: ##bucket sort
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count ={}
         freq = [[] for i in range(len(nums)+1)]
+##creating a bucket
 
         for n in nums:
             count[n] = 1+count.get(n,0)
