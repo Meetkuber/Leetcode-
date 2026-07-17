@@ -1,14 +1,10 @@
-from collections import defaultdict
-class Solution(object):
-    def groupAnagrams(self, strs):
-        anagram_dict = defaultdict(list)
-        for s in strs:
-            count = [0] * 26
-            for c in s:
-                count[ord(c)- ord('a')] += 1
-            key = tuple(count)
-            anagram_dict[key].append(s)
-        return anagram_dict.values()
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagram_map = defaultdict(list)
 
-        
-        
+        for word in strs:
+            sorted_word = ''.join(sorted(word))
+            anagram_map[sorted_word].append(word)
+        return list(anagram_map.values())
+# TC:O(NK log K)
+# SC:O(N K) 
