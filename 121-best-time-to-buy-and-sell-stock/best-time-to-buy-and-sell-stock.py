@@ -1,16 +1,14 @@
+from typing import List
+
 class Solution(object):
     def maxProfit(self, prices):
-        
-        min_price = float('inf')#setting  val to 0 
-        max_profit = 0
+        minPrice = float('inf')
+        maxProfit = 0
 
         for price in prices:
-            if price < min_price:
-                min_price = price
-            
-            profit = price - min_price 
-
-            if profit > max_profit:
-                max_profit = profit 
-
-        return max_profit
+            if price < minPrice:
+                minPrice = price
+            elif price - minPrice > maxProfit:
+                maxProfit = price - minPrice
+                
+        return maxProfit
