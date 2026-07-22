@@ -2,19 +2,25 @@ from collections import Counter
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        # Edge case: If s1 is longer than s2, s2 can't contain s1's permutation
-        if len(s1) > len(s2):
+        n1, n2 = len(s1), len(s2)
+        if n1 > n2:
             return False
             
         s1_count = Counter(s1)
-        
-        # Check every substring in s2 that is the exact same length as s1
-        for i in range(len(s2) - len(s1) + 1):
-            # Slice s2 to get the current window
-            sub_string = s2[i : i + len(s1)]
-            
-            # If the counts match, we found a permutation!
-            if s1_count == Counter(sub_string):
+        window_count = Counter(s2[:n1])
+
+        if s1_count == window_count:
+            return True
+
+        for i in range(n1, n2):
+            window_count[s2[i]] += 1
+
+            leftchar = s2[i - n1]
+            window_count[leftchar] -= 1
+            if window_count[leftchar] == 0:
+                del window_count[leftchar]
+
+            if s1_count == window_count:
                 return True
-                
+
         return False
